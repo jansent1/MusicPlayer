@@ -22,7 +22,7 @@
             <h1>Flying</h1>
             <p>Track Tribe</p>
 
-            <audio controls id="song">
+            <audio id="song">
                 <source src="media/Flying - Track Tribe.mp3" type="audio/mpeg">
             </audio>
             <input type="range" value="0" id="progress">
@@ -52,9 +52,22 @@
             }
             else{
                 song.play();
-                ctrlIcon.classList.remove("fa-play");
                 ctrlIcon.classList.add("fa-pause");
+                ctrlIcon.classList.remove("fa-play");
             }
+        }
+<!--Progressbar functionality-->
+        if(song.play()){
+            setInterval(()=>{
+                progress.value = song.currentTime;
+            },500);
+        }
+
+        progress.onchange = function(){
+            song.play();
+            song.currentTime = progress.value;
+            ctrlIcon.classList.add("fa-pause");
+            ctrlIcon.classList.remove("fa-play");
         }
     </script>
 
